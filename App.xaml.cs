@@ -1,4 +1,4 @@
-﻿namespace PizzaMAUI
+﻿namespace VegStore
 {
     public partial class App : Application
     {

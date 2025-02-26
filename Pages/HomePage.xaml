@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VegStore.Pages.HomePage"
+             Title="Fresh Pick"
+             Padding="15">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Border StrokeShape="RoundRectangle 10"
+                    StrokeThickness="0"
+                    BackgroundColor="LimeGreen"
+                    VerticalOptions="Start"
+                    Padding="15">
+                <Grid ColumnDefinitions="*, 150"
+                      RowDefinitions="*, Auto">
+                    <VerticalStackLayout Grid.Column="0"
+                                         Grid.Row="0"
+                                         Spacing="10">
+                        <Label Text="Best Offer"
+                               FontSize="25"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"/>
+                        <Label Text="Grab this amazing offer before "/>
+                    </VerticalStackLayout>
+                    <Button Grid.Row="1"
+                            Grid.Column="0"
+                            Text="Get it now"
+                            BackgroundColor="LightGreen"
+                            TextColor="Black"
+                            FontAttributes="Bold"
+                            CornerRadius="22"
+                            HorizontalOptions="Center"
+                            Padding="50, 0"/>
+                    <Image Grid.RowSpan="2"
+                            Grid.Column="1"
+                           Source="tomato"
+                           HeightRequest="150"
+                           WidthRequest="150"/>
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

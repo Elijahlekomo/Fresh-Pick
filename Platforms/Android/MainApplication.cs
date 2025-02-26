@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace PizzaMAUI
+namespace VegStore
 {
     [Application]
     public class MainApplication : MauiApplication

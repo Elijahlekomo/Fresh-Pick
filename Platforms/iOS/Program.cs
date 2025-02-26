@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace PizzaMAUI
+namespace VegStore
 {
     public class Program
     {

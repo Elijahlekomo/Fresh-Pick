@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 
-namespace PizzaMAUI
+namespace VegStore
 {
     public static class MauiProgram
     {
