@@ -1,5 +1,8 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using VegStore.Service;
+using VegStore.ViewModels;
+using VegStore.Pages;
 
 namespace VegStore
 {
@@ -19,9 +22,19 @@ namespace VegStore
 
 #if DEBUG
     		builder.Logging.AddDebug();
-#endif
-
+#endif      
+            AddVegetableServices(builder.Services);
             return builder.Build();
+        }
+
+        private static IServiceCollection
+            AddVegetableServices(IServiceCollection services)
+        {
+            services.AddSingleton<VegetableService>();
+            services.AddSingletonWithShellRoute<HomePage, HomeViewModel>(nameof(HomePage));
+            services.AddTransientWithShellRoute<AllVegesPage, AllVegesViewModel>(nameof(AllVegesPage));
+
+            return services;
         }
     }
 }

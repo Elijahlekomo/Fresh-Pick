@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace VegStore.Models
 {
-    public partial class VegStore : ObservableObject
+    public partial class Vegetable : ObservableObject
     {
-        public string Name { get; set; }
-        public string Image { get; set; }
+        public string Name { get; set; } = null!;
+        public string Image { get; set; } = null!;
 
         public double Price { get; set; }
 
@@ -18,9 +18,9 @@ namespace VegStore.Models
          NotifyPropertyChangedFor(nameof(Amount))]
         private int _cartQuantity;
 
-        public double Amount => _cartQuantity * Price;
+        public double Amount => CartQuantity * Price;
 
-       public VegStore Clone() => MemberwiseClone() as VegStore;
+       public Vegetable Clone() => MemberwiseClone() as Vegetable;
 
     }
 }

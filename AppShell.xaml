@@ -5,14 +5,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:VegStore.Pages"
     Shell.FlyoutBehavior="Disabled"
-    Shell.BackgroundColor="Lavender">
+    Shell.BackgroundColor="LimeGreen">
 
     <ShellContent
         Title=""
         ContentTemplate="{DataTemplate pages:MainPage}"
         Route="MainPage" />
     
-    <ShellContent
+   <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate pages:HomePage}"
         Route="HomePage" />

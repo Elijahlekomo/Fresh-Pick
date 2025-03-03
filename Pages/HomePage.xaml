@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vm="clr-namespace:VegStore.ViewModels"
+             xmlns:models="clr-namespace:VegStore.Models"
              x:Class="VegStore.Pages.HomePage"
              Title="Fresh Pick"
-             Padding="15">
+             Padding="15"
+             x:DataType="vm:HomeViewModel">
+    
     <ScrollView>
-        <VerticalStackLayout>
+        <VerticalStackLayout Spacing="10">
             <Border StrokeShape="RoundRectangle 10"
                     StrokeThickness="0"
                     BackgroundColor="LimeGreen"
@@ -38,6 +43,97 @@
                            WidthRequest="150"/>
                 </Grid>
             </Border>
+
+            <Border StrokeShape="RoundRectangle 22"
+                    StrokeThickness="2"
+                    Stroke="LightGreen">
+                <Label Text="Search here..."
+                       TextColor="LightGreen"
+                       Padding="10, 14"/>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToAllVegetablesPageCommand}"
+                                            CommandParameter="{x:Boolean true}"/>
+                </Border.GestureRecognizers>
+            </Border>
+
+            <BoxView HeightRequest="15"
+                     Color="White"/>
+
+            <Grid ColumnDefinitions="*, *">
+                <Label Grid.Column="0"
+                       Text="Popular Items"
+                       VerticalOptions="End"
+                       FontSize="20"
+                       FontAttributes="Bold"/>
+                <Label Grid.Column="1"
+                       Text="View All"
+                       HorizontalOptions="End"
+                       VerticalOptions="End"
+                       TextDecorations="Underline">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToAllVegetablesPageCommand}"
+                                              CommandParameter="{x:Boolean false}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+
+            <FlexLayout BindableLayout.ItemsSource="{Binding Vegetables}"
+                        Wrap="Wrap">
+                <BindableLayout.ItemTemplate>
+                   <DataTemplate x:DataType="models:Vegetable">
+                        <Border FlexLayout.Basis="50%"
+                                StrokeShape="RoundRectangle 10"
+                                StrokeThickness="0"
+                                BackgroundColor="GreenYellow"
+                                Padding="10"
+                                Margin="2"
+                                >
+
+                            <Grid RowDefinitions="150, Auto, Auto, Auto"
+                                   RowSpacing="5">
+                                <Image Grid.Row="0"
+                                       Source="{Binding Image}"
+                                       WidthRequest="110"
+                                       HeightRequest="150"/>
+                                <Label Grid.Row="1"
+                                       Text="{Binding Name}"
+                                       HorizontalOptions="Center"/>
+
+                                <Grid Grid.Row="2"
+                                      ColumnDefinitions="*, *">
+                                    <Label Grid.Column="0"
+                                           Text="{Binding Price, StringFormat=$'{0:N2}'}"
+                                           VerticalOptions="Center"
+                                           FontAttributes="Bold"/>
+                                    <HorizontalStackLayout Grid.Column="1"
+                                                           HorizontalOptions="End"
+                                                           Spacing="2"
+                                                           VerticalOptions="Center">
+                                        <Label Text="4"/>
+                                        <Image Source="star"
+                                               HeightRequest="15"
+                                               WidthRequest="15">
+                                            <Image.Behaviors>
+                                                <toolkit:IconTintColorBehavior TintColor="DarkGoldenrod"/>
+                                            </Image.Behaviors>
+                                        </Image>
+                                    </HorizontalStackLayout>
+                                </Grid>
+                                <Button Grid.Row="3"
+                                        Text="View More"
+                                        BackgroundColor="LawnGreen"
+                                        TextColor="Black"
+                                        CornerRadius="22"
+                                        FontAttributes="Bold"
+                                        VerticalOptions="End"
+                                        HorizontalOptions="Center"
+                                        Padding="25, 0"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate> 
+                </BindableLayout.ItemTemplate>
+            </FlexLayout>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
