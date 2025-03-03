@@ -22,5 +22,26 @@
                    CancelButtonColor="Red"
                    TextColor="LightGreen"
                    ios:SearchBar.SearchBarStyle="Minimal"/>
+        <ScrollView Grid.Row="1"
+                    Margin="5">
+            <VerticalStackLayout>
+                <CollectionView ItemsSource="{Binding Vegetables}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                           ItemSpacing="10"/>
+                        <DataTemplate x:DataType="models:Vegetable">
+                            <Border StrokeShape="RoundRectangle 10"
+                                    StrokeThickness="0"
+                                    BackgroundColor="LightGreen"
+                                    Padding="10"
+                                    Margin="5">
+                                <Label Text="{Binding Name}"/>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+                    
     </Grid>
 </ContentPage>
