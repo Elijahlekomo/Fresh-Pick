@@ -17,11 +17,15 @@
     </ContentPage.Triggers>
     <Grid RowDefinitions="Auto, *">
         <SearchBar Grid.Row="0"
+                   x:Name="searchBar"
                    Placeholder="Search for pizza..."
                    PlaceholderColor="LightGreen"
                    CancelButtonColor="Red"
                    TextColor="LightGreen"
-                   ios:SearchBar.SearchBarStyle="Minimal"/>
+                   SearchCommand="{Binding SearchVegetablesCommand}"
+                   SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}"
+                   TextChanged="searchBar_TextChanged"
+                   />
         <ScrollView Grid.Row="1"
                     Margin="5">
             <VerticalStackLayout>
@@ -29,19 +33,91 @@
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical"
                                            ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Vegetable">
                             <Border StrokeShape="RoundRectangle 10"
                                     StrokeThickness="0"
                                     BackgroundColor="LightGreen"
                                     Padding="10"
                                     Margin="5">
-                                <Label Text="{Binding Name}"/>
+                                <Grid ColumnDefinitions="130, *" 
+                                      ColumnSpacing="10">
+                                    <Image Grid.Column="0"
+                                           Source="{Binding Image}"
+                                           HeightRequest="130"
+                                           WidthRequest="130"/>
+                                    <VerticalStackLayout Grid.Column="1"
+                                                         VerticalOptions="Center"
+                                                         Spacing="5">
+                                        <Label Text="{Binding Name}"
+                                               FontSize="20"/>
+                                        <Grid ColumnDefinitions="*, *">
+                                            <Label Grid.Column="0"
+                                                   Text="{Binding Price, StringFormat='${0:N2}'}"
+                                                   FontAttributes="Bold"/>
+                                            <HorizontalStackLayout Grid.Column="1"
+                                                    HorizontalOptions="End"
+                                                    Spacing="2"
+                                                    VerticalOptions="Center">
+                                                <Label Text="4"/>
+                                                <Image Source="star"
+                                                            HeightRequest="15"
+                                                            WidthRequest="15">
+                                                    <Image.Behaviors>
+                                                        <toolkit:IconTintColorBehavior TintColor="DarkGoldenrod"/>
+                                                    </Image.Behaviors>
+                                                </Image>
+                                            </HorizontalStackLayout>
+                                        </Grid>
+                                        <Border StrokeShape="RoundRectangle 25"
+                                                    StrokeThickness="0"
+                                                    BackgroundColor="LawnGreen"
+                                                    HeightRequest="45"
+                                                    HorizontalOptions="Center"
+                                                    Padding="30, 5"
+                                                    VerticalOptions="End">
+                                                <HorizontalStackLayout Spacing="8">
+                                                    <Label Text="View more"
+                                                           VerticalOptions="Center"/>
+                                                    <Image Source="right_arrow"
+                                                           HeightRequest="20"
+                                                           VerticalOptions="Center"/>
+                                                </HorizontalStackLayout>
+                                                
+                                            </Border>
+                                        
+                                    </VerticalStackLayout>
+                                                         
+                                </Grid>
                             </Border>
                         </DataTemplate>
-                    </CollectionView.ItemsLayout>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.EmptyView>
+
+                        <Label Text="No Vegetables found"
+                                   FontSize="30"
+                                   Margin="30"
+                                   TextColor="Grey"
+                                   HorizontalOptions="Center"
+                                   HorizontalTextAlignment="Center">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label"
+                                                Binding="{Binding Searching}"
+                                                Value="True">
+                                    <Setter Property="Text"
+                                            Value="Searching..."/>
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </CollectionView.EmptyView>
                 </CollectionView>
             </VerticalStackLayout>
         </ScrollView>
-                    
+        <ActivityIndicator Grid.RowSpan="2"
+                           IsRunning="{Binding Searching}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Color="LawnGreen"/>
     </Grid>
 </ContentPage>

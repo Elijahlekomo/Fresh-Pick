@@ -9,4 +9,13 @@ public partial class AllVegesPage : ContentPage
 		_allVegesViewModel = allVegesViewModel;
 		BindingContext = _allVegesViewModel;
 	}
+
+    private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
+    {
+		if(!string.IsNullOrWhiteSpace(e.OldTextValue)
+			&&String.IsNullOrWhiteSpace(e.NewTextValue))
+		{
+			_allVegesViewModel.SearchVegetablesCommand.Execute(null);
+		}
+    }
 }

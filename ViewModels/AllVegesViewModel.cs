@@ -18,10 +18,12 @@ namespace VegStore.ViewModels
         [ObservableProperty]
         private bool _Searching;
 
+        [RelayCommand]
         private async Task SearchVegetables(string searchTerm)
         {
             Vegetables.Clear();
             Searching = true;
+            await Task.Delay(1000);
             foreach (var vegetable in _vegetableService.SearchVegetables(searchTerm))
             {
                 Vegetables.Add(vegetable);
