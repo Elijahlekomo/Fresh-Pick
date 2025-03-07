@@ -33,6 +33,7 @@ namespace VegStore
             services.AddSingleton<VegetableService>();
             services.AddSingletonWithShellRoute<HomePage, HomeViewModel>(nameof(HomePage));
             services.AddTransientWithShellRoute<AllVegesPage, AllVegesViewModel>(nameof(AllVegesPage));
+            services.AddTransientWithShellRoute<DetailPage, DetailsViewModel>(nameof(DetailPage));
 
             return services;
         }

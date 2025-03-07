@@ -22,5 +22,16 @@ namespace VegStore.ViewModels
 
             await Shell.Current.GoToAsync(nameof(AllVegesPage), animate: true, parameters);
         }
+
+        [RelayCommand]
+        private async Task GoToDetailsPage(Vegetable vegetable)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                [nameof(DetailsViewModel.Vegetable)] = vegetable
+            };
+
+            await Shell.Current.GoToAsync(nameof(DetailPage), animate: true, parameters);
+        }
     }
 }

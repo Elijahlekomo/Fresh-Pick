@@ -6,7 +6,7 @@
              xmlns:models="clr-namespace:VegStore.Models"
              xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration;assembly=Microsoft.Maui.Controls"
              x:Class="VegStore.Pages.AllVegesPage"
-             Title="AllVegesPage"
+             Title="All Vegetables"
              x:DataType="vm:AllVegesViewModel">
     <ContentPage.Triggers>
         <DataTrigger TargetType="ContentPage"
@@ -84,7 +84,12 @@
                                                            HeightRequest="20"
                                                            VerticalOptions="Center"/>
                                                 </HorizontalStackLayout>
-                                                
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding
+                                                    Source={x:RelativeSource AncestorType={x:Type
+                                                    vm:AllVegesViewModel}}, Path=GoToDetailsPageCommand}"
+                                                                      CommandParameter="{Binding . }"/>
+                                            </Border.GestureRecognizers>
                                             </Border>
                                         
                                     </VerticalStackLayout>

@@ -30,6 +30,17 @@ namespace VegStore.ViewModels
             }
             Searching = false;
         }
+
+        [RelayCommand]
+        private async Task GoToDetailsPage(Vegetable vegetable)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                [nameof(DetailsViewModel.Vegetable)] = vegetable
+            };
+
+            await Shell.Current.GoToAsync(nameof(DetailPage), animate: true, parameters);
+        }
     }
 
 }

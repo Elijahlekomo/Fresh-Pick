@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vm="clr-namespace:VegStore.ViewModels"
+             xmlns:models="clr-namespace:VegStore.Models"
+             x:Class="VegStore.Pages.DetailPage"
+             Title=""
+             Shell.NavBarIsVisible="False"
+             x:DataType="vm:DetailsViewModel">
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="White"
+                                   StatusBarStyle="DarkContent"/>
+    </ContentPage.Behaviors>
+    <Grid>
+        <ScrollView Padding="15">
+            <VerticalStackLayout Spacing="15">
+                <Image Source="{Binding Vegetable.Image}"
+                       HeightRequest="200"
+                       WidthRequest="200"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+                <Label Text="{Binding Vegetable.Name}"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"/>
+                <Grid ColumnDefinitions="*, *">
+                    <Label Grid.Column="0"
+                        Text="{Binding Price, StringFormat='${0:N2}'}"
+                        FontAttributes="Bold"/> 
+                    <HorizontalStackLayout Grid.Column="1"
+                         HorizontalOptions="End"
+                         Spacing="2"
+                         VerticalOptions="Center">
+                                <Label Text="4"/>
+                        <Image Source="star"
+                                 HeightRequest="15"
+                                 WidthRequest="15">
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="DarkGoldenrod"/>
+                            </Image.Behaviors>
+                        </Image>    
+                    </HorizontalStackLayout>
+                </Grid>
+
+                <Label Text="Description"
+                       FontSize="15"
+                       FontAttributes="Bold"
+                       Margin="0, 10"/>
+
+                <Label FontSize="14"
+                       LineHeight="1.5"
+                       Text="Promotion is one week only Buy and order the best vegetables in the city "/>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Border StrokeThicknes="0"
+                BackgroundColor="LightGreen"
+                Margin="-1"
+                VerticalOptions="End"
+                HeightRequest="150"
+                Padding="15"
+                StrokeShape="RoundRectangle 30, 30, 0, 0">
+            
+        </Border>
+    </Grid>
+</ContentPage>

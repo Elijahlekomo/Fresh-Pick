@@ -10,6 +10,15 @@ public partial class AllVegesPage : ContentPage
 		BindingContext = _allVegesViewModel;
 	}
 
+	protected override async void OnAppearing()
+	{
+		base.OnAppearing();
+		if(_allVegesViewModel.FromSearch)
+		{
+			await Task.Delay(100);
+			searchBar.Focus();
+		}
+	}
     private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
     {
 		if(!string.IsNullOrWhiteSpace(e.OldTextValue)
