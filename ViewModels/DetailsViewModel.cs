@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace VegStore.ViewModels
 {
@@ -15,5 +12,31 @@ namespace VegStore.ViewModels
 
         [ObservableProperty]
         private Vegetable _vegetable;
+
+        [RelayCommand]
+        private void AddToCart()
+        {
+            Vegetable.CartQuantity++;
+        }
+        
+        [RelayCommand]
+        private void RemoveFromCart()
+        {
+            if(Vegetable.CartQuantity > 0)
+                Vegetable.CartQuantity--;
+        }
+
+        [RelayCommand]
+        private async Task ViewCart()
+        {
+            if (Vegetable.CartQuantity > 0)
+            {
+
+            }
+            else
+            {
+                await Toast.Make("Add item to cart", ToastDuration.Short).show();
+            }
+        }
     }
 }

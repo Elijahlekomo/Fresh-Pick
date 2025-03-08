@@ -12,6 +12,16 @@
         <toolkit:StatusBarBehavior StatusBarColor="White"
                                    StatusBarStyle="DarkContent"/>
     </ContentPage.Behaviors>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="QuantityBtn" TargetType="ImageButton">
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="WidthRequest" Value="40"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Padding" Value="0"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <Grid>
         <ScrollView Padding="15">
             <VerticalStackLayout Spacing="15">
@@ -26,7 +36,7 @@
                        HorizontalOptions="Center"/>
                 <Grid ColumnDefinitions="*, *">
                     <Label Grid.Column="0"
-                        Text="{Binding Price, StringFormat='${0:N2}'}"
+                        Text="{Binding Vegetable.Price, StringFormat='${0:N2}'}"
                         FontAttributes="Bold"/> 
                     <HorizontalStackLayout Grid.Column="1"
                          HorizontalOptions="End"
@@ -54,14 +64,82 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <Border StrokeThicknes="0"
+        <Border StrokeThickness="0"
+                x:Name="bottomBox"
                 BackgroundColor="LightGreen"
                 Margin="-1"
                 VerticalOptions="End"
                 HeightRequest="150"
                 Padding="15"
-                StrokeShape="RoundRectangle 30, 30, 0, 0">
-            
+                StrokeShape="{OnPlatform Android='RoundRectangle 30, 30, 0, 0',
+                                         Default='RoundRectangle 0'}">
+            <Border.Shadow>
+                <Shadow Brush="LightGreen"
+                        Radius="100"/>
+            </Border.Shadow>
+           <Grid RowDefinitions="Auto, Auto"
+            ColumnDefinitions="*, *">
+                <Label Grid.Row="0"
+            Grid.Column="0"
+            Text="{Binding Vegetable.Amount,
+            StringFormat='${0:N2}'}"
+            FontSize="20"
+            TextColor="White"
+            FontAttributes="Bold"
+            VerticalOptions="Center"/>
+                <Grid Grid.Row="0"
+                     Grid.Column="1"
+                     ColumnDefinitions="50, 40, 50"
+                     HorizontalOptions="End"
+                     VerticalOptions="Center">
+                    <ImageButton Grid.Column="0"
+                                 Source="decrease"
+                                 Style="{StaticResource QuantityBtn}"
+                                 Command="{Binding RemoveFromCartCommand}">
+                        <ImageButton.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="Green"/>
+                        </ImageButton.Behaviors>
+                    </ImageButton>
+                    <Label Grid.Column="1"
+                           Text="{Binding Vegetable.CartQuantity}"
+                           TextColor="White"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           FontSize="25"/>
+                    <ImageButton Grid.Column="2"
+                                 Source="increase"
+                                 Style="{StaticResource QuantityBtn}"
+                                 Command="{Binding AddToCartCommand}">
+                        <ImageButton.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="Green"/>
+                        </ImageButton.Behaviors>
+                    </ImageButton>
+                </Grid>
+
+                <Button Grid.Row="1"
+                       Grid.ColumnSpan="2"
+                       Text="View Cart"
+                        BackgroundColor="LawnGreen"
+                        HorizontalOptions="Center"
+                        CornerRadius="22"
+                        Padding="80, 10"
+                        VerticalOptions="End"
+                        Margin="0, 20"
+                        Command="{Binding ViewCartCommand}"
+                        />
+            </Grid>
         </Border>
+        <ImageButton Source="{OnPlatform Android='right_arrow', Default ='previous'}"
+              VerticalOptions="Start"
+              HorizontalOptions="Start"
+              Margin="15"
+              RotationY="{OnPlatform Android=180, Default=0}"
+              Clicked="ImageButton_Clicked"
+              BorderWidth="10">
+            
+            <ImageButton.Behaviors>
+                <toolkit:IconTintColorBehavior TintColor="LightGreen"/>
+            </ImageButton.Behaviors>
+        </ImageButton>
     </Grid>
 </ContentPage>

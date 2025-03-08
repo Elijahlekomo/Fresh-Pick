@@ -5,5 +5,6 @@ global using VegStore.Models;
 global using VegStore.Service;
 global using VegStore.Pages;
 global using VegStore.ViewModels;
-global using CommunityToolkit.Mvvm.Input; 
-
+global using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
