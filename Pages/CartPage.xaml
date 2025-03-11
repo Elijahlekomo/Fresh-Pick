@@ -130,7 +130,8 @@
                         CornerRadius="22"
                         VerticalOptions="Center"
                         HorizontalOptions="End"
-                        Padding="25, 10"/>
+                        Padding="25, 10"
+                        Command="{Binding PlaceOrderCommand}"/>
             </Grid>
         </Border>
     </Grid>

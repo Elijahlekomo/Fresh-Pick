@@ -78,7 +78,9 @@ namespace VegStore.ViewModels
         private async Task PlaceOrder()
         {
             Items.Clear();
+            CartCleared?.Invoke(this, EventArgs.Empty);
             RecalculateTotalAmount();
+            await Shell.Current.GoToAsync(nameof(CheckoutPage), animate: true);
         }
     }
 }
