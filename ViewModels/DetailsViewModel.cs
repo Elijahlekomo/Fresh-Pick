@@ -6,12 +6,29 @@ using CommunityToolkit.Maui.Core;
 namespace VegStore.ViewModels
 {
     [QueryProperty(nameof(Vegetable), nameof(Vegetable))]
-    public partial class DetailsViewModel : ObservableObject
+    public partial class DetailsViewModel : ObservableObject, IDisposable
     {
         private readonly CartViewModel _cartViewModel;
         public DetailsViewModel(CartViewModel cartViewModel)
         {
             _cartViewModel= cartViewModel;
+
+            _cartViewModel.CartCleared += OnCartCleared;
+            _cartViewModel.CartItemRemoved += OnCartItemRemoved;
+            _cartViewModel.CartItemUpdated += OnCartItemUpdated;
+
+        }
+
+        private void OnCartCleared(object? _, EventArgs e) => Vegetable.CartQuantity = 0;
+        private void OnCartItemRemoved(object? _, Vegetable p) => OnCartItemChanged(p, 0);
+        private void OnCartItemUpdated(object? _, Vegetable p) => OnCartItemChanged(p, p.CartQuantity);
+
+        private void OnCartItemChanged(Vegetable p, int quantity)
+        {
+            if (p.Name == Vegetable.Name)
+            { 
+                Vegetable.CartQuantity = quantity;
+            }
         }
 
         [ObservableProperty]
@@ -46,6 +63,14 @@ namespace VegStore.ViewModels
             {
                 await Toast.Make("Add item to cart", ToastDuration.Short).Show();
             }
+        }
+
+        public void Dispose()
+        {
+
+            _cartViewModel.CartCleared += OnCartCleared;
+            _cartViewModel.CartItemRemoved += OnCartItemRemoved;
+            _cartViewModel.CartItemUpdated += OnCartItemUpdated;
         }
     }
 }

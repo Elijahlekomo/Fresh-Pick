@@ -31,9 +31,13 @@ namespace VegStore
             AddVegetableServices(IServiceCollection services)
         {
             services.AddSingleton<VegetableService>();
-            services.AddSingletonWithShellRoute<HomePage, HomeViewModel>(nameof(HomePage));
+
+            services.AddSingleton<HomePage>()
+                    .AddSingleton<HomeViewModel>();
+
             services.AddTransientWithShellRoute<AllVegesPage, AllVegesViewModel>(nameof(AllVegesPage));
             services.AddTransientWithShellRoute<DetailPage, DetailsViewModel>(nameof(DetailPage));
+            //services.AddTransientWithShellRoute<CartPage, CartViewModel>(nameof(CartPage));
 
             services.AddSingleton<CartViewModel>();
             services.AddTransient<CartPage>();

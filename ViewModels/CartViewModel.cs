@@ -6,6 +6,11 @@ namespace VegStore.ViewModels
 {
     public partial class CartViewModel : ObservableObject
     {
+        public event EventHandler<Vegetable> CartItemRemoved;
+        public event EventHandler<Vegetable> CartItemUpdated;
+        public event EventHandler CartCleared;
+
+      
         public ObservableCollection<Vegetable> Items { get; set; } = new();
 
         [ObservableProperty]
@@ -37,7 +42,9 @@ namespace VegStore.ViewModels
                 Items.Remove(item);
                 RecalculateTotalAmount();
 
-                var snackbarOptions = new SnackbarOptions
+                CartItemRemoved?.Invoke(this, item);
+
+              var snackbarOptions = new SnackbarOptions
                 {
                     CornerRadius = 10,
                     BackgroundColor = Colors.PaleGreen
@@ -47,6 +54,7 @@ namespace VegStore.ViewModels
                     {
                         Items.Add(item);
                         RecalculateTotalAmount();
+                        CartItemUpdated?.Invoke(this, item);
                     }, "Undo", TimeSpan.FromSeconds(5), snackbarOptions);
                 await snackbar.Show();
             }
@@ -60,6 +68,7 @@ namespace VegStore.ViewModels
             {
                 Items.Clear();
                 RecalculateTotalAmount();
+                CartCleared?.Invoke(this, EventArgs.Empty);
                 await Toast.Make("Cart Cleared", ToastDuration.Short).Show();
             }
             
