@@ -35,7 +35,10 @@ namespace VegStore
             services.AddTransientWithShellRoute<AllVegesPage, AllVegesViewModel>(nameof(AllVegesPage));
             services.AddTransientWithShellRoute<DetailPage, DetailsViewModel>(nameof(DetailPage));
 
+            services.AddSingleton<CartViewModel>();
+            services.AddTransient<CartPage>();
+            
             return services;
         }
-    }
+    } 
 }
