@@ -7,4 +7,17 @@ Built project with:
 - Xaml
    
 ## Screenshot of the project     
+__Main Page__    
+
 __Home Page__    
+
+__Detail Page__    
+
+__Checkout Page__    
+
+__cart Page__    
+
+__All Vagetable Page__    
+
+
+
